@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="assets/css/style.css">
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load('current', { packages: ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart());
+
+        
+
+     
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Confusion Matrix', 'Values'],
+          ['TF', 89],
+          ['FP', 8],
+          ['FN', 16],
+          ['TN', 87]
+        ]);
+
+        var options = {
+          title: 'Performance of Turbine'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  
+</head>
+
+<body>
+    <form>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <img src="assets/imgs/Logo.png" alt="" width="60px">
+                        <h2><span class="title">Thinkers</span></h2>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a target="_blank" href="prediction.html">
+                        <span class="icon">
+                            <img src="assets/imgs/predi.png" alt="" width="35px">
+                        </span>
+                        <span class="title">Prediction</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a target="_blank" href="report.html">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Report</span>
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" href="alert.html">
+                        <span class="icon">
+                            <img src="assets/imgs/setting (2).png" alt="" width="35px">
+                        </span>
+                        <span class="title">Alert Setting</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+
+        <!--  Main  -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+                
+
+                
+            </div>
+            <center><h1>Predictive DashBoard</h1>
+            
+            <!--  Cards -->
+          
+            <div class="cardBox">
+                <div class="card">
+                    <div id="piechart" style="width: 900px; height: 500px;"></div></div>
+                    <style>
+                        .cardBox{
+                            align-items: center;
+                        }
+                    </style>
+                </center>
+    </form>
+            <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+            <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        </body>
+        </html>

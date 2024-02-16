@@ -1,0 +1,109 @@
+<!-- data-table.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="assets/css/report.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Table</title>
+    <style>
+        /* Add any additional styles for your table if needed */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-buttons">
+        <button onclick="exportToExcel()">Export to Excel File</button>
+        <button onclick="window.location.href='index.html'">Back To Report</button>
+
+
+
+
+    </div>
+    <div id="dataTable"></div>
+
+    <script>
+
+function exportToExcel() {
+        // Fetch the data from the server
+        fetch('http://localhost:5500/getData')
+            .then(response => response.json())
+            .then(data => {
+                // Create a worksheet
+                const ws = XLSX.utils.json_to_sheet(data);
+
+                // Create a workbook with a single sheet
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, 'Sheet 1');
+
+                // Save the workbook to a file
+                XLSX.writeFile(wb, 'report.xlsx');
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+
+
+        // Function to fetch and display data in a table
+        function fetchData() {
+            fetch('http://localhost:5500/getData')
+                .then(response => response.json())
+                .then(data => {
+                    const dataTable = document.getElementById('dataTable');
+
+                    // Create a table
+                    const table = document.createElement('table');
+
+                    // Check if there is data
+                    if (data.length > 0) {
+                        // Create header row
+                        const headerRow = table.insertRow();
+                        for (const key in data[0]) {
+                            const headerCell = headerRow.insertCell();
+                            headerCell.innerHTML = key;
+                        }
+
+                        // Create data rows
+                        data.forEach(item => {
+                            const dataRow = table.insertRow();
+                            for (const key in item) {
+                                const dataCell = dataRow.insertCell();
+                                dataCell.innerHTML = item[key];
+                            }
+                        });
+                    } else {
+                        // Display a message if there is no data
+                        const messageCell = table.insertRow().insertCell();
+                        messageCell.colSpan = Object.keys(data[0]).length;
+                        messageCell.innerHTML = 'No data available.';
+                    }
+
+                    // Append table to the dataTable div
+                    dataTable.innerHTML = '';
+                    dataTable.appendChild(table);
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        // Call the fetchData function
+        fetchData();
+    </script>
+    <!-- Add this to the head section of your HTML -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="assets/css/style.css">
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load('current', { packages: ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart());
+
+        
+
+     
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <form>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <img src="assets/imgs/Logo.png" alt="" width="60px">
+                        <h1><span class="title">Thinkers</span></h1>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a target="_blank" href="prediction.html">
+                        <span class="icon">
+                            <img src="assets/imgs/predi.png" alt="" width="35px">
+                        </span>
+                        <span class="title">Prediction</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a target="_blank" href="report.html">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Report</span>
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" href="alert.html">
+                        <span class="icon">
+                            <img src="assets/imgs/setting (2).png" alt="" width="35px">
+                        </span>
+                        <span class="title">Alert Setting</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <!--  Main  -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+                
+
+                
+            </div>
+            <center><h1>Realtime DashBoard</h1></center>
+            
+            <!--  Cards -->
+          
+            <div class="cardBox">
+                <div class="card">
+                    <div>
+                        <div class="numbers" <span id="metric1Value" name="waterlevel" value="metric1Value">Loding... </span></div>
+                        <div class="cardName">Water Level(%)</div>
+                    </div>
+
+                        <img src="assets/imgs/water.png" alt="" width="60px">
+               
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="numbers" <span id="metric2Value">Loding... </span></div>
+                        <div class="cardName">Inflow Water(JPM)</div>
+                    </div>
+
+                    <img src="assets/imgs/inflow.png" alt="" width="60px">
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="numbers" <span id="metric3Value">Loding... </span></div>
+                        <div class="cardName">Outflow Water(JPM)</div>
+                    </div>
+
+                    <img src="assets/imgs/outflow.png" alt="" width="60px">
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="numbers"<span id="metric4Value">Loding... </span></div>
+                        <div class="cardName">Temperature(°C)</div>
+                    </div>
+
+                    <img src="assets/imgs/temperature.png" alt="" width="70px">
+                </div>
+            </div>
+<div class="cardBox">
+    
+            <div class="card">
+                <div>
+                    <div class="numbers"<span id="randomNumber">Loding... </span></div>
+                    <div class="cardName">Humidity Range</div>
+                </div>
+
+                <img src="assets/imgs/humidity.png" alt="" width="70px">
+            </div>
+
+            <div class="card">
+                <div>
+                    <div class="numbers"<span id="rpm">Loding... </span></div>
+                    <div class="cardName">Turbine RPM</div>
+                </div>
+
+                <img src="assets/imgs/turbine.png" alt="" width="80px">
+            </div>
+
+            <div class="card">
+                <div>
+                    <div class="numbers"<span id="powerr">Loding... </span></div>
+                    <div class="cardName">Power Generate(W)</div>
+                </div>
+
+                <img src="assets/imgs/power.png" alt="" width="80px">
+            </div>
+
+            <div class="card">
+                <div>
+                    <div class="numbers"<span id="totalpower">Loding... </span></div>
+                    <div class="cardName">Total Power<br>Generated(KW)</div>
+                </div>
+
+                <img src="assets/imgs/totalpower.png" alt="" width="70px">
+            </div>
+        </div>
+        <div class="cardBox">
+    
+            <div class="card">
+                <div>
+                    <div class="numbers"<span id="waterpre">Loding... </span></div>
+                    <div class="cardName">Water Pressure(Pascal)</div>
+                </div>
+
+                <img src="assets/imgs/pre.png" alt="" width="70px">
+            </div>
+
+
+        </div>
+        
+    </form>
+    <div id="waterChart" style="width: 100%; height: 500px;"></div>
+        
+        <div class="cardBox">
+    
+            <div class="card">
+                <h3>Alert</h3><br>
+                <div class="cardName" id="alertContainer"></div>
+                
+            </div>
+            </div>
+
+        
+    <script>
+
+//store dATA ON local machine
+
+function setCookie(name, value, days) {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+  }
+
+  // Function to get a cookie value by name
+  function getCookie(name) {
+    const keyValue = document.cookie.match(`(^|;) ?${name}=([^;]*)(;|$)`);
+    return keyValue ? keyValue[2] : null;
+  }
+
+  // Function to remove a cookie by name
+  function removeCookie(name) {
+    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+  }
+
+  // Function to save alert settings as cookies
+  function saveAlertSettings(dataType, comparison, threshold) {
+    setCookie(`${dataType}AlertComparison`, comparison, 365);
+    setCookie(`${dataType}AlertThreshold`, threshold, 365);
+  }
+
+  // Function to load alert settings from cookies
+  function loadAlertSettings(dataType) {
+    const comparison = getCookie(`${dataType}AlertComparison`);
+    const threshold = getCookie(`${dataType}AlertThreshold`);
+    return { comparison, threshold };
+  }
+
+  // Function to check and remove alert based on cookies
+  function checkAndRemoveAlert(dataType, currentValue) {
+    const { comparison, threshold } = loadAlertSettings(dataType);
+
+    if (comparison && threshold) {
+      const condition = eval(`${currentValue} ${comparison} ${threshold}`);
+
+      if (condition) {
+        alert(`${dataType} alert triggered! ${currentValue} ${comparison} ${threshold}`);
+        removeAlert(dataType);
+      }
+    }
+  }
+
+
+// Alert Function 
+
+
+let alertTriggered = false;
+
+        function checkAlert(dataType, currentValue) {
+            if (!alertTriggered) {
+                const comparison = localStorage.getItem(`${dataType}AlertComparison`);
+                const threshold = localStorage.getItem(`${dataType}AlertThreshold`);
+
+                if (comparison && threshold) {
+                    // Evaluate the condition based on the stored comparison and threshold
+                    const condition = eval(`${currentValue} ${comparison} ${threshold}`);
+
+                    if (condition) {
+                        alert(`${dataType} alert triggered! ${currentValue} ${comparison} ${threshold}`);
+
+                        // Remove the alert settings after the alert is triggered
+                        removeAlert(dataType);
+
+                        // Set the flag to indicate that the alert has been triggered
+                        alertTriggered = true;
+                    }
+                }
+            }
+        }
+
+// Remove alert 
+function removeAlert(dataType) {        
+            localStorage.removeItem(`${dataType}AlertComparison`);
+            localStorage.removeItem(`${dataType}AlertThreshold`);
+            localStorage.removeItem(`${dataType}AlertTriggered`);
+        }
+
+
+        // Dam performance  
+
+        function getRandomValue(min, max) {
+          return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        //Humidity cal
+
+        function generateRandomNumber(minimum, maximum, average, closeFactor = 0.1) {
+    // Ensure the close factor is within a valid range
+    closeFactor = Math.max(0, Math.min(1, closeFactor));
+
+    // Calculate the range for randomization
+    const rangeMin = Math.max(minimum, average - (average - minimum) * closeFactor);
+    const rangeMax = Math.min(maximum, average + (maximum - average) * closeFactor);
+
+    // Generate a random number within the calculated range
+    const randomNumber = Math.random() * (rangeMax - rangeMin) + rangeMin;
+
+    // Round the number to 2 decimal places
+    const roundedNumber = Number(randomNumber.toFixed(2));
+
+    return roundedNumber;
+}
+// Power generatation based on rpm 
+
+let totalPowerGenerated = 0;
+
+function formatPower(power) {
+    if (power >= 1e12) {
+        return (power / 1e12).toFixed(1) + "T";
+    } else if (power >= 1e9) {
+        return (power / 1e9).toFixed(1) + "B";
+    } else if (power >= 1e6) {
+        return (power / 1e6).toFixed(1) + "M";
+    } else if (power >= 1e3) {
+        return (power / 1e3).toFixed(1) + "k";
+    } else {
+        return power.toString();
+    }
+}
+
+
+function calculatePowerGeneration(rpm) {
+   if (rpm < 114 || rpm > 999) {
+        console.error("Invalid RPM value. RPM should be between 114 and 999.");
+        return null;
+   }
+    
+
+    // RPM and Power Generation ranges
+    const rpmRanges = [144,180, 200, 240, 999];
+    const powerRanges = [0.11,1.11, 1.30, 1.75, 2.91];
+
+    // Find the corresponding power range based on RPM
+    let powerGenerated;
+
+    for (let i = 0; i < rpmRanges.length - 1; i++) {
+        if (rpm >= rpmRanges[i] && rpm < rpmRanges[i + 1]) {
+            powerGenerated = Math.floor(Math.random() * (powerRanges[i + 1] - powerRanges[i]) + powerRanges[i]);
+            break;
+        }
+    }
+
+    totalPowerGenerated += powerGenerated;
+
+    return {
+        rpm: rpm,
+        powerGenerated: powerGenerated,
+        totalPowerGenerated: totalPowerGenerated
+    };
+}
+
+function calculatePowerGenneration(rpm) {
+    if (rpm < 144 || rpm > 999) {
+        console.error("Invalid RPM value. RPM should be between 144 and 999.");
+        return null;
+    }
+
+    let powerMin, powerMax;
+
+    if (rpm < 200) {
+        powerMin = 0.11;
+        powerMax = 1.0;
+    } else if (rpm < 500) {
+        powerMin = 1.01;
+        powerMax = 2.96;
+    } else {
+        powerMin = 3.0;
+        powerMax = 4.96;
+    }
+
+    // Generate a random power value within the specified range
+    const powerGenerated = Math.round(Math.random() * (powerMax - powerMin) + powerMin);
+
+    return powerGenerated;
+}
+
+
+
+
+function withoutdescimal(randomNumber)
+{
+    const roundedNumber = Math.round(randomNumber);
+
+    return roundedNumber;
+}
+
+function showAlert(message) {
+            const alertContainer = document.getElementById('alertContainer');
+
+            // Create  the alert
+            const alertElement = document.createElement('div');
+            alertElement.className = 'alert';
+            alertElement.textContent = message;
+
+          
+            alertContainer.appendChild(alertElement);
+
+            
+        }
+
+       // Function to update 
+        function updateDashboard() {
+  
+          // Generate random values
+          const rpm1=withoutdescimal(generateRandomNumber(180, 263, 210, 0.1));
+          const metric1Value = getRandomValue(85, 110); //0 to 100% // water level
+          const metric2Value = generateRandomNumber(61.54,468.13,260.37, 0.1); //inflow actual range 61.54 to 468.13
+          const metric3Value = generateRandomNumber(59.44,488.67,301.22, 0.1); //outflowwater
+          const metric4Value = withoutdescimal(generateRandomNumber(5.6, 24.99,14.63, 0.1)); //
+          const randomNumber = generateRandomNumber(0, 1, 0.81, 0.1); //humidity
+          const rpm = withoutdescimal(generateRandomNumber(114,999,583, 0.1));
+          const power= calculatePowerGeneration(rpm);
+          const powerr=power.powerGenerated;
+          const totalpower =formatPower(power.totalPowerGenerated);
+          const waterpre=generateRandomNumber(17,299,179.83,0.1); //pascal
+
+          checkAlert('waterLevel', metric1Value);
+          checkAlert('inflowwater', metric2Value);
+          checkAlert('outflowwater', metric3Value);
+          checkAlert('temperature', metric4Value);
+          checkAlert('humidityrange', randomNumber);
+          checkAlert('turbineRPM', rpm);
+          checkAlert('powergenerate', powerr);
+          checkAlert('waterpressure', waterpre);
+          checkAlert('totalPowerGenerated', power.totalPowerGenerated);
+          
+         
+          if(metric1Value>100)
+          {
+                showAlert("Water Level OVERFLOW !!!!");
+
+          }
+    
+          const metric1ValueElement = document.getElementById('metric1Value');
+          metric1ValueElement.textContent = metric1Value;
+
+          const metric2ValueElement = document.getElementById('metric2Value');
+          metric2ValueElement.textContent = metric2Value;
+
+          const metric3ValueElement = document.getElementById('metric3Value');
+          metric3ValueElement.textContent = metric3Value;
+
+          const metric4ValueElement = document.getElementById('metric4Value');
+          metric4ValueElement.textContent = metric4Value;
+      
+          const metric5ValueElement = document.getElementById('randomNumber');
+          metric5ValueElement.textContent = randomNumber;
+
+          const metric6ValueElement = document.getElementById('rpm');
+          metric6ValueElement.textContent = rpm;
+
+          const metric7ValueElement = document.getElementById('powerr');
+          metric7ValueElement.textContent = powerr;
+         
+          const metric8ValueElement = document.getElementById('totalpower');
+          metric8ValueElement.textContent = totalpower;
+
+          const metric9ValueElement = document.getElementById('waterpre');
+          metric9ValueElement.textContent = waterpre;
+
+
+          const data = new URLSearchParams();
+        data.append('metric1Value', metric1Value);
+        data.append('metric2Value', metric2Value);
+        data.append('metric3Value', metric3Value);
+        data.append('metric4Value', metric4Value);
+        data.append('randomNumber', randomNumber);
+        data.append('rpm', rpm);
+        data.append('powerGenerated', powerr);
+        data.append('totalPowerGenerated', totalpower);
+        data.append('waterpre', waterpre);
+        
+        
+
+
+        // Send data to the server using fetch
+        fetch('http://localhost:5500/insertData', {
+            method: 'POST',
+            body: data
+        })
+        .then(response => response.text())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error:', error));
+
+    }
+        
+        // Update the dashboard every 4 seconds (adjust as needed)
+        setInterval(updateDashboard, 4000);
+      
+        // Initial update
+        updateDashboard();
+
+    // chart
+    function drawChart() {
+      // Fetch inflow and outflow data from the server
+      fetch('http://localhost:5500/waterData')
+        .then(response => response.json())
+        .then(data => {
+          // Format the data for the chart
+          const chartData = [['Time', 'inflowwater', 'outflowwater']];
+          data.forEach(row => {
+            chartData.push([row.time, row.inflowwater, row.outflowwater]);
+          });
+
+          var dataTable = google.visualization.arrayToDataTable(chartData);
+
+          var options = {
+            title: 'Water Inflow and Outflow Chart',
+            hAxis: { title: 'Time', titleTextStyle: { color: '#333' } },
+            vAxis: { minValue: 0 },
+            series: {
+              0: { color: 'blue' }, // Inflow
+              1: { color: 'green' } // Outflow
+            }
+          };
+
+          var chart = new google.visualization.AreaChart(document.getElementById('waterChart'));
+          chart.draw(dataTable, options);
+        })
+        .catch(error => console.error('Error fetching water data:', error));
+    }
+
+// Update the chart every 4 seconds
+    
+    // Update the chart every 4 seconds
+    setInterval(updateDashboard(), 6000);
+    setInterval(drawChart, 10000);
+
+
+
+      </script>
+      
+    <!-- =========== Scripts =========  -->
+    <script src="assets/js/main.js"></script>
+    
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

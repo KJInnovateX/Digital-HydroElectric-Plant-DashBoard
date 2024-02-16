@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Alert Settings</title>
+    <link rel="stylesheet" href="assets/css/report.css">
+    <style>
+      .form{
+        background-color: #15172b;
+  border-radius: 20px;
+  box-sizing: border-box;
+  height: 550px;
+  padding: 20px;
+  width: 420px;
+      }
+      body {
+    font-family: system-ui, sans-serif;
+     /* background-color: #2a2185; */
+     background: #141e30, #243b55;
+  background-color: #243b55;
+       }
+form div {
+  margin-top: 1rem;
+  
+}
+.login_box {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+  .dtype{
+    /* position: absolute; */
+    height: 35px;
+  /* position: relative; */
+  width: 100%;
+  float: left;
+  text-align: left;
+  }
+  .comparison{
+    height: 35px;
+  /* position: relative; */
+  width: 100%;
+  float: left;
+  text-align: left;
+  margin-bottom: 10px;
+
+  }
+  .comparison_box{
+    height: 35px;
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+
+  }
+  .title {
+  color: #eee;
+  font-family: sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  margin-top: 30px;
+}
+.dtype_input{
+    height: 35px;
+  position: relative;
+  width: 100%;
+}
+.threshold{
+    height: 35px;
+  /* position: relative; */
+  width: 100%;
+  float: left;
+  text-align: left;
+  margin-top: 40px;
+  
+}
+.threshold_box{
+    height: 35px;
+  position: relative;
+  width: 100%;
+}
+.submit{
+    background-color: #08d;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  cursor: pointer;
+  font-size: 18px;
+  height: 50px;
+  margin-top: 30px;
+  
+  text-align: center;
+  width: 100%;
+}
+.remove{
+    background-color: #08d;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  cursor: pointer;
+  font-size: 18px;
+  height: 50px;
+  margin-top: 13px;
+ 
+  text-align: center;
+  width: 100%;
+}
+.back{
+  margin-bottom: 20px;
+  margin-top: 15px;
+  background-color: #08d;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  cursor: pointer;
+  font-size: 18px;
+  height: 50px;
+  
+  text-align: center;
+  width: 100%;
+}
+
+
+    </style>
+</head>
+
+<body>
+  
+    <div class="login_box">
+   <center> <br><br><h1 class="title">Alert Settings</h1></center>
+
+    <center><form id="alertForm" class="form">
+        <div ><label class="dtype" for="dataType">Select Data Type:</label>
+        <select id="dataType" name="dataType" class="dtype_input">
+            <option value="waterLevel">Water Level</option>
+            <option value="inflowwater">Inflow Water</option>
+            <option value="outflowwater">OutFlow Water</option>
+            <option value="temperature">Temperature(C)</option>
+            <option value="humidityrange">Humidity Range</option>
+            <option value="turbineRPM">Turbine RPM</option>
+            <option value="totalPowerGenerated">Total Power Generated</option>
+            <option value="waterpressure">Water Pressure</option>
+            
+        </select>
+    </div>
+        <br>
+       <div class="comparison"> <label for="comparison">Select Comparison:</label>
+        <br><select id="comparison" name="comparison" class="comparison_box">
+            <option value=">">Greater Than</option>
+            <option value="<">Less Than</option>
+            <option value="=">Equal To</option>
+            <option value="!=">Not Equal To</option>
+        </select>
+    </div>
+        <br>
+        <div><label for="threshold" class="threshold">Threshold Value:</label>
+        <input type="number" id="threshold" class="threshold_box" name="threshold" min="0">
+    </div>
+    <div>
+        <button type="button" onclick="setAlert()" class="submit">Set Alert</button>
+        <button type="button" onclick="removeAlert()" class="remove">Remove Alert</button>
+  
+        <button type="button" class="back" onclick="window.location.href='index.html'">Back To Report</button>
+    </div>
+    </form></center>
+</div>
+    <script>
+        function setAlert() {
+            const dataType = document.getElementById('dataType').value;
+            const comparison = document.getElementById('comparison').value;
+            const threshold = document.getElementById('threshold').value;
+
+            // Validate the threshold (you may want to add additional validation)
+            if (!isNaN(threshold) && threshold >= 0) {
+                // Save alert settings to local storage
+                localStorage.setItem(`${dataType}AlertComparison`, comparison);
+                localStorage.setItem(`${dataType}AlertThreshold`, threshold);
+                alert("Done");
+                // Close the alert settings page
+                window.close();
+            } else {
+                alert('Invalid threshold value. Please enter a non-negative number.');
+            }
+        }
+        function removeAlert() {
+            const dataType = document.getElementById('dataType').value;
+
+            // Remove alert settings from local storage
+            localStorage.removeItem(`${dataType}AlertComparison`);
+            localStorage.removeItem(`${dataType}AlertThreshold`);
+            alert("Alert Removed");
+            // Close the alert settings page
+            window.close();
+        }
+    </script>
+</body>
+
+</html>
